@@ -26,7 +26,7 @@ FEATURE_NAMES = [
 
 # Path relatif dari root repo (berlaku baik lokal maupun Streamlit Cloud)
 MODEL_PATH  = os.path.join('models', 'svm_model.pkl')
-SCALER_PATH = os.path.join('data', 'processed', 'scaler.joblib')
+SCALER_PATH = os.path.join('data', 'scaler.joblib')
 
 # ── Load artifacts ────────────────────────────────────────────────────────────
 @st.cache_resource
