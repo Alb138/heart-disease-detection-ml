@@ -77,6 +77,51 @@ st.markdown(
 )
 st.divider()
 
+# --- Contoh Data Valid ---
+SAMPLE_DATA = {
+    "Risiko Rendah – Pria 40th, ATA, BP normal": {
+        "Age": 40, "Sex": "M", "ChestPainType": "ATA",
+        "RestingBP": 140, "Cholesterol": 289, "FastingBS": 0,
+        "RestingECG": "Normal", "MaxHR": 172, "ExerciseAngina": "N",
+        "Oldpeak": 0.0, "ST_Slope": "Up",
+    },
+    "Risiko Tinggi – Pria 52th, ASY, depresi ST": {
+        "Age": 52, "Sex": "M", "ChestPainType": "ASY",
+        "RestingBP": 140, "Cholesterol": 266, "FastingBS": 0,
+        "RestingECG": "Normal", "MaxHR": 134, "ExerciseAngina": "Y",
+        "Oldpeak": 2.0, "ST_Slope": "Flat",
+    },
+}
+
+with st.expander("💡 Contoh Data Valid dari Dataset"):
+    st.markdown(
+        "Pilih salah satu contoh di bawah untuk mengisi formulir secara otomatis. "
+        "Data diambil langsung dari dataset *Heart Failure Prediction*."
+    )
+    selected_sample = st.selectbox(
+        "Pilih contoh data:",
+        options=["— Pilih contoh —"] + list(SAMPLE_DATA.keys()),
+        key="sample_selector",
+    )
+ 
+    if selected_sample != "— Pilih contoh —":
+        s = SAMPLE_DATA[selected_sample]
+        col_s1, col_s2 = st.columns(2)
+        with col_s1:
+            st.markdown(f"- **Usia:** {s['Age']} tahun")
+            st.markdown(f"- **Jenis Kelamin:** {'Pria' if s['Sex'] == 'M' else 'Wanita'}")
+            st.markdown(f"- **Tipe Nyeri Dada:** {s['ChestPainType']}")
+            st.markdown(f"- **Tekanan Darah:** {s['RestingBP']} mmHg")
+            st.markdown(f"- **Kolesterol:** {s['Cholesterol']} mg/dL")
+            st.markdown(f"- **Gula Darah Puasa >120:** {'Ya' if s['FastingBS'] == 1 else 'Tidak'}")
+        with col_s2:
+            st.markdown(f"- **ECG Istirahat:** {s['RestingECG']}")
+            st.markdown(f"- **Detak Jantung Maks:** {s['MaxHR']} bpm")
+            st.markdown(f"- **Angina saat Olahraga:** {'Ya' if s['ExerciseAngina'] == 'Y' else 'Tidak'}")
+            st.markdown(f"- **Oldpeak:** {s['Oldpeak']}")
+            st.markdown(f"- **Kemiringan ST:** {s['ST_Slope']}")
+        st.info("ℹ️ Salin nilai-nilai di atas ke formulir di bawah untuk mencoba prediksi.")
+        
 st.subheader("📋 Data Pasien")
 
 with st.form("prediction_form"):
