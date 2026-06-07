@@ -3,7 +3,7 @@
 > Sistem Pendukung Keputusan Deteksi Dini Risiko Penyakit Jantung  
 > Berbasis **Support Vector Machine (SVM-RBF)**
 
-** Live App:** [heart-disease-detection-ml-app.streamlit.app](https://heart-disease-detection-ml-app.streamlit.app/)
+**Live App:** [heart-disease-detection-ml-app.streamlit.app](https://heart-disease-detection-ml-app.streamlit.app/)
 
 ---
 
