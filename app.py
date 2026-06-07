@@ -5,14 +5,12 @@ import joblib
 import os
 from datetime import datetime
 
-# ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Deteksi Risiko Penyakit Jantung",
     page_icon="🫀",
     layout="centered",
 )
 
-# ── Constants ─────────────────────────────────────────────────────────────────
 CHOL_MEDIAN = 237.0   # median kolesterol non-zero dari training set
 
 FEATURE_NAMES = [
@@ -24,11 +22,9 @@ FEATURE_NAMES = [
     'ST_Slope_Flat', 'ST_Slope_Up',
 ]
 
-# Path relatif dari root repo (berlaku baik lokal maupun Streamlit Cloud)
 MODEL_PATH  = os.path.join('models', 'svm_model.pkl')
 SCALER_PATH = os.path.join('data', 'scaler.joblib')
 
-# ── Load artifacts ────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_artifacts():
     for path, label in [(MODEL_PATH, 'svm_model.pkl'), (SCALER_PATH, 'scaler.joblib')]:
@@ -37,7 +33,6 @@ def load_artifacts():
             st.stop()
     return joblib.load(SCALER_PATH), joblib.load(MODEL_PATH)
 
-# ── Preprocessing ─────────────────────────────────────────────────────────────
 def preprocess(inputs: dict) -> pd.DataFrame:
     chol_raw     = inputs['Cholesterol']
     chol_missing = 1 if chol_raw == 0 else 0
@@ -66,7 +61,6 @@ def preprocess(inputs: dict) -> pd.DataFrame:
     df = pd.DataFrame([row])[FEATURE_NAMES]
     return pd.DataFrame(scaler.transform(df), columns=FEATURE_NAMES)
 
-# ── Header ────────────────────────────────────────────────────────────────────
 st.title("🫀 Deteksi Dini Risiko Penyakit Jantung")
 st.markdown(
     "Sistem pendukung keputusan berbasis **Support Vector Machine (SVM-RBF)** "
@@ -74,7 +68,6 @@ st.markdown(
 )
 st.divider()
 
-# ── Input form ────────────────────────────────────────────────────────────────
 st.subheader("📋 Data Pasien")
 
 with st.form("prediction_form"):
@@ -137,7 +130,6 @@ with st.form("prediction_form"):
 
     submitted = st.form_submit_button("🔍 Analisis Risiko", use_container_width=True)
 
-# ── Prediction result ─────────────────────────────────────────────────────────
 if submitted:
     inputs = {
         "Age": age, "Sex": sex, "ChestPainType": chest_pain,
@@ -180,7 +172,6 @@ if submitted:
         "tidak menggantikan diagnosis medis profesional."
     )
 
-# ── Feedback form ─────────────────────────────────────────────────────────────
 st.divider()
 with st.expander("📝 Feedback — User Testing"):
     st.markdown(
