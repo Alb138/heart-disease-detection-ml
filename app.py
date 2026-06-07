@@ -28,7 +28,7 @@ FEATURE_NAMES = [
     'ST_Slope_Flat', 'ST_Slope_Up',
 ]
 
-GOOGLE_FORM_URL = 'https://forms.gle/auRuCvu71KhfhxkR9'
+GOOGLE_FORM_URL = 'https://forms.gle/RJFoDA8ZBbnUhjo58'
 
 MODEL_PATH  = os.path.join('models', 'svm_model.pkl')
 SCALER_PATH = os.path.join('data', 'scaler.joblib')
