@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import joblib
 import os
-from datetime import datetime
 
 st.set_page_config(
     page_title="Deteksi Risiko Penyakit Jantung",
@@ -11,7 +10,14 @@ st.set_page_config(
     layout="centered",
 )
 
-CHOL_MEDIAN = 237.0   # median kolesterol non-zero dari training set
+# Hilangkan icon anchor (⇗) di samping heading
+st.markdown("""
+<style>
+[data-testid="stHeaderActionElements"] { display: none !important; }
+</style>
+""", unsafe_allow_html=True)
+
+CHOL_MEDIAN = 237.0
 
 FEATURE_NAMES = [
     'Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak',
@@ -22,6 +28,8 @@ FEATURE_NAMES = [
     'ST_Slope_Flat', 'ST_Slope_Up',
 ]
 
+GOOGLE_FORM_URL = 'https://forms.gle/auRuCvu71KhfhxkR9'
+
 MODEL_PATH  = os.path.join('models', 'svm_model.pkl')
 SCALER_PATH = os.path.join('data', 'scaler.joblib')
 
@@ -29,7 +37,7 @@ SCALER_PATH = os.path.join('data', 'scaler.joblib')
 def load_artifacts():
     for path, label in [(MODEL_PATH, 'svm_model.pkl'), (SCALER_PATH, 'scaler.joblib')]:
         if not os.path.exists(path):
-            st.error(f"❌ File tidak ditemukan: `{path}`  \nPastikan kamu menjalankan dari root repo.")
+            st.error(f"❌ File tidak ditemukan: `{path}`")
             st.stop()
     return joblib.load(SCALER_PATH), joblib.load(MODEL_PATH)
 
@@ -60,6 +68,7 @@ def preprocess(inputs: dict) -> pd.DataFrame:
     scaler, _ = load_artifacts()
     df = pd.DataFrame([row])[FEATURE_NAMES]
     return pd.DataFrame(scaler.transform(df), columns=FEATURE_NAMES)
+
 
 st.title("🫀 Deteksi Dini Risiko Penyakit Jantung")
 st.markdown(
@@ -130,6 +139,7 @@ with st.form("prediction_form"):
 
     submitted = st.form_submit_button("🔍 Analisis Risiko", use_container_width=True)
 
+
 if submitted:
     inputs = {
         "Age": age, "Sex": sex, "ChestPainType": chest_pain,
@@ -172,14 +182,16 @@ if submitted:
         "tidak menggantikan diagnosis medis profesional."
     )
 
+
 st.divider()
+
 with st.expander("📝 Feedback dari User Testing"):
     st.markdown(
-    "Bantu kami meningkatkan sistem ini dengan mengisi survey singkat berikut. "
-    "Feedback kamu sangat berarti untuk pengembangan lebih lanjut."
+        "Bantu kami meningkatkan sistem ini dengan mengisi survey singkat berikut. "
+        "Feedback kamu sangat berarti untuk pengembangan lebih lanjut."
     )
-   st.link_button(
-    "📋 Isi Survey Feedback (Google Form)",
-    GOOGLE_FORM_URL = 'https://forms.gle/auRuCvu71KhfhxkR9',
-    use_container_width=True,
+    st.link_button(
+        "📋 Isi Survey Feedback (Google Form)",
+        GOOGLE_FORM_URL,
+        use_container_width=True,
     )
