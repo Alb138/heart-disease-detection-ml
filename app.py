@@ -128,10 +128,14 @@ with st.form("prediction_form"):
     col1, col2 = st.columns(2)
 
     with col1:
-        age = st.number_input("Usia (tahun)", 20, 100, 50)
+        age = st.number_input(
+            "Usia (tahun)", 20, 100, 50,
+            help="Usia pasien dalam tahun. Risiko penyakit jantung umumnya meningkat seiring bertambahnya usia.",
+        )
         sex = st.selectbox(
             "Jenis Kelamin", ["M", "F"],
             format_func=lambda x: "Pria" if x == "M" else "Wanita",
+            help="Jenis kelamin biologis pasien. Pria (M) umumnya memiliki risiko penyakit jantung lebih tinggi dibanding wanita pada usia yang sama.",
         )
         chest_pain = st.selectbox(
             "Tipe Nyeri Dada",
@@ -142,15 +146,32 @@ with st.form("prediction_form"):
                 "NAP": "NAP – Nyeri Non-Anginal",
                 "TA":  "TA  – Angina Tipikal",
             }[x],
+            help=(
+                "Klasifikasi nyeri dada pasien:\n"
+                "• ASY (Asimtomatik): Tidak ada nyeri dada, paling berisiko.\n"
+                "• ATA (Angina Atipikal): Nyeri dada tidak khas, tidak memenuhi kriteria angina tipikal.\n"
+                "• NAP (Non-Anginal Pain): Nyeri dada yang bukan berasal dari jantung.\n"
+                "• TA (Angina Tipikal): Nyeri dada klasik akibat kurangnya suplai darah ke jantung."
+            ),
         )
-        resting_bp = st.number_input("Tekanan Darah Istirahat (mmHg)", 60, 250, 120)
+        resting_bp = st.number_input(
+            "Tekanan Darah Istirahat (mmHg)", 60, 250, 120,
+            help="Tekanan darah sistolik saat pasien dalam kondisi istirahat. Nilai normal: 90–120 mmHg. Hipertensi (>130 mmHg) meningkatkan risiko penyakit jantung.",
+        )
         cholesterol = st.number_input(
             "Kolesterol Serum (mg/dL)", 0, 700, 200,
-            help="Masukkan 0 jika data kolesterol tidak tersedia",
+            help=(
+                "Total kolesterol dalam darah hasil pemeriksaan laboratorium.\n"
+                "• Normal: < 200 mg/dL\n"
+                "• Batas tinggi: 200–239 mg/dL\n"
+                "• Tinggi: ≥ 240 mg/dL\n"
+                "Masukkan 0 jika data tidak tersedia (sistem akan menggunakan median 237 mg/dL)."
+            ),
         )
         fasting_bs = st.selectbox(
             "Gula Darah Puasa > 120 mg/dL", [0, 1],
             format_func=lambda x: "Ya (>120 mg/dL)" if x == 1 else "Tidak (≤120 mg/dL)",
+            help="Kadar gula darah setelah puasa minimal 8 jam. Nilai > 120 mg/dL mengindikasikan kemungkinan diabetes, yang merupakan faktor risiko signifikan penyakit jantung.",
         )
 
     with col2:
@@ -162,15 +183,29 @@ with st.form("prediction_form"):
                 "LVH":    "LVH – Hipertrofi Ventrikel Kiri",
                 "ST":     "ST  – Kelainan Gelombang ST-T",
             }[x],
+            help=(
+                "Hasil elektrokardiogram (EKG) saat istirahat:\n"
+                "• Normal: Tidak ada kelainan listrik jantung.\n"
+                "• LVH (Left Ventricular Hypertrophy): Penebalan dinding ventrikel kiri, tanda beban kerja jantung berlebih.\n"
+                "• ST: Kelainan gelombang ST-T yang dapat mengindikasikan iskemia atau masalah konduksi jantung."
+            ),
         )
-        max_hr = st.number_input("Detak Jantung Maksimum (bpm)", 60, 220, 140)
+        max_hr = st.number_input(
+            "Detak Jantung Maksimum (bpm)", 60, 220, 140,
+            help="Detak jantung tertinggi yang dicapai pasien selama uji beban/treadmill. Nilai lebih rendah dari perkiraan usia (220 - usia) dapat mengindikasikan gangguan fungsi jantung.",
+        )
         ex_angina = st.selectbox(
             "Angina Akibat Olahraga", ["N", "Y"],
             format_func=lambda x: "Tidak" if x == "N" else "Ya",
+            help="Apakah pasien mengalami nyeri atau rasa tidak nyaman di dada saat melakukan aktivitas fisik/olahraga. Angina saat olahraga (exercise-induced angina) adalah tanda kuat adanya penyempitan arteri koroner.",
         )
         oldpeak = st.number_input(
             "Oldpeak (Depresi Segmen ST)", -3.0, 7.0, 0.0, step=0.1,
-            help="Nilai numerik depresi ST saat olahraga vs istirahat",
+            help=(
+                "Nilai depresi segmen ST pada EKG saat olahraga dibandingkan saat istirahat (dalam mV).\n"
+                "• Nilai 0: Tidak ada depresi (normal).\n"
+                "• Nilai > 0: Semakin tinggi nilainya, semakin besar kemungkinan iskemia miokard (kekurangan aliran darah ke otot jantung)."
+            ),
         )
         st_slope = st.selectbox(
             "Kemiringan Segmen ST",
@@ -180,6 +215,12 @@ with st.form("prediction_form"):
                 "Flat": "Flat – Datar",
                 "Down": "Down – Turun",
             }[x],
+            help=(
+                "Arah kemiringan segmen ST pada EKG puncak olahraga:\n"
+                "• Up (Naik): Umumnya normal, prognosis baik.\n"
+                "• Flat (Datar): Berpotensi abnormal, bisa mengindikasikan iskemia.\n"
+                "• Down (Turun): Abnormal, risiko penyakit jantung lebih tinggi."
+            ),
         )
 
     submitted = st.form_submit_button("🔍 Analisis Risiko", use_container_width=True)
