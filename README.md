@@ -1,1 +1,5 @@
-# heart-disease-detection-ml
+# Heart Disease Risk Detection System
+
+## Sistem Pendukung Keputusan Deteksi Dini Risiko Penyakit Jantung Berbasis Support Vector Machine (SVM-RBF)
+
+Proyek ini membangun sebuah clinical decision support system berbasis Machine Learning untuk mendeteksi risiko penyakit jantung dari parameter pemeriksaan klinis rutin. Sistem dirancang sebagai alat bantu second opinion bagi tenaga medis di klinik, puskesmas, atau fasilitas kesehatan lainnya — bukan untuk self-assessment mandiri oleh pasien. Pipeline yang dibangun mencakup end-to-end: data preprocessing, feature engineering, model training & evaluation, hingga deployment sebagai web application.
