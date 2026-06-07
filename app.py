@@ -173,22 +173,13 @@ if submitted:
     )
 
 st.divider()
-with st.expander("📝 Feedback — User Testing"):
+with st.expander("📝 Feedback dari User Testing"):
     st.markdown(
-        "Berikan penilaian **1 – 5**  \n"
-        "*(1 = Sangat Tidak Setuju · 5 = Sangat Setuju)*"
-    )
-    with st.form("feedback_form"):
-        q1 = st.slider("1. Aplikasi ini mudah digunakan", 1, 5, 3)
-        q2 = st.slider("2. Hasil prediksi ditampilkan dengan jelas", 1, 5, 3)
-        q3 = st.slider("3. Aplikasi ini berguna sebagai alat skrining awal", 1, 5, 3)
-        q4 = st.slider("4. Saya percaya terhadap hasil yang diberikan", 1, 5, 3)
-        q5 = st.slider("5. Saya akan merekomendasikan aplikasi ini", 1, 5, 3)
-        comment = st.text_area("Komentar atau saran (opsional):")
-        fb_sent = st.form_submit_button("Kirim Feedback")
-
-    if fb_sent:
-        st.success("✅ Terima kasih atas feedback Anda!")
-        # Tampilkan ringkasan — file write tidak persisten di Streamlit Cloud
-        avg = (q1 + q2 + q3 + q4 + q5) / 5
-        st.info(f"Rata-rata skor: **{avg:.1f} / 5.0**")
+    "Bantu kami meningkatkan sistem ini dengan mengisi survey singkat berikut. "
+    "Feedback kamu sangat berarti untuk pengembangan lebih lanjut."
+)
+   st.link_button(
+    "📋 Isi Survey Feedback (Google Form)",
+    GOOGLE_FORM_URL = 'https://forms.gle/auRuCvu71KhfhxkR9',
+    use_container_width=True,
+)
