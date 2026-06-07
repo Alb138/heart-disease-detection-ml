@@ -271,6 +271,27 @@ if submitted:
 
 st.divider()
 
+with st.expander("ℹ️ Tentang Model"):
+    st.markdown("""
+    **Model yang digunakan:** Support Vector Machine — RBF Kernel (C=1, gamma=scale)
+
+    **Dataset:** Heart Failure Prediction — fedesoriano (Kaggle)  
+    918 pasien · 11 fitur klinis · target biner (0 = Sehat, 1 = Penyakit Jantung)
+
+    | Metrik | Nilai |
+    |--------|-------|
+    | F1-Score | **0.9057** |
+    | ROC-AUC | **0.9460** |
+    | Recall | **0.9412** |
+    | Akurasi | **0.8913** |
+    | Precision | **0.8727** |
+
+    Model dibandingkan dengan Logistic Regression (baseline) dan Random Forest.  
+    SVM-RBF dipilih karena menghasilkan F1-Score dan ROC-AUC tertinggi,  
+    serta jumlah *false negative* terkecil (6 dari 102 kasus positif di test set).
+    """)
+
+
 with st.expander("📝 Feedback dari User Testing"):
     st.markdown(
         "Bantu kami meningkatkan sistem ini dengan mengisi survey singkat berikut. "
