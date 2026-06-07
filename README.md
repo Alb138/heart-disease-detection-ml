@@ -1,13 +1,13 @@
-# 🫀 Heart Disease Risk Detection System
+# Heart Disease Risk Detection System
 
 > Sistem Pendukung Keputusan Deteksi Dini Risiko Penyakit Jantung  
 > Berbasis **Support Vector Machine (SVM-RBF)**
 
-**🔗 Live App:** [heart-disease-detection-ml-app.streamlit.app](https://heart-disease-detection-ml-app.streamlit.app/)
+** Live App:** [heart-disease-detection-ml-app.streamlit.app](https://heart-disease-detection-ml-app.streamlit.app/)
 
 ---
 
-## 📌 Overview
+## Overview
 
 Proyek ini membangun sebuah *clinical decision support system* berbasis Machine Learning untuk mendeteksi risiko penyakit jantung dari parameter pemeriksaan klinis rutin. Sistem dirancang sebagai **alat bantu second opinion** bagi tenaga medis di klinik, puskesmas, atau fasilitas kesehatan lainnya — bukan untuk self-assessment mandiri oleh pasien.
 
@@ -15,7 +15,7 @@ Pipeline yang dibangun mencakup end-to-end: data preprocessing, feature engineer
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 **Heart Failure Prediction Dataset** — [fedesoriano (Kaggle, 2021)](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
 
@@ -47,7 +47,7 @@ Merupakan gabungan dari 5 dataset klinis independen (Cleveland, Budapest, Long B
 
 ---
 
-## 🔧 Preprocessing Pipeline
+## Preprocessing Pipeline
 
 1. **Handle `RestingBP = 0`** — 1 baris data entry error, diimputasi dengan median (130 mmHg)
 2. **MNAR handling pada `Cholesterol = 0`** — 172 baris (18.7%) dikode 0, terbukti *Missing Not At Random* (88.4% adalah pasien positif). Ditangani dengan:
@@ -61,13 +61,13 @@ Merupakan gabungan dari 5 dataset klinis independen (Cleveland, Budapest, Long B
 
 ---
 
-## 🤖 Model & Hasil Evaluasi
+## Model & Hasil Evaluasi
 
 ### Perbandingan Model
 
 | Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
 |-------|:--------:|:---------:|:------:|:--------:|:-------:|
-| **SVM-RBF** ✅ | **0.8913** | 0.8727 | **0.9412** | **0.9057** | **0.9460** |
+| **SVM-RBF** | **0.8913** | 0.8727 | **0.9412** | **0.9057** | **0.9460** |
 | LR (Baseline) | 0.8913 | 0.8868 | 0.9216 | 0.9038 | 0.9327 |
 | Random Forest | 0.8913 | **0.9020** | 0.9020 | 0.9020 | 0.9385 |
 | SVM-Linear | 0.8750 | 0.8692 | 0.9118 | 0.8900 | 0.9344 |
@@ -81,7 +81,7 @@ Merupakan gabungan dari 5 dataset klinis independen (Cleveland, Budapest, Long B
 
 ---
 
-## 🚀 Menjalankan Secara Lokal
+## Menjalankan Secara Lokal
 
 ### Prasyarat
 - Python 3.11
@@ -115,8 +115,3 @@ pandas
 numpy
 joblib
 ```
-
-
-<div align="center">
-  <sub>Built with ❤️ for COMP6577001 Machine Learning · BINUS University 2025/2026</sub>
-</div>
