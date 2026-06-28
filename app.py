@@ -397,14 +397,6 @@ with st.expander("ℹ️ Tentang Model"):
             </div>
             """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <p style="color:#78716C;font-size:0.82rem;margin-top:1rem;padding-top:0.8rem;
-              border-top:1px solid #F0EBE8;">
-      Model dibandingkan dengan Logistic Regression (baseline) dan Random Forest.
-      SVM-RBF dipilih karena F1-Score & ROC-AUC tertinggi, serta
-      false negative terkecil — hanya 6 dari 102 kasus positif di test set.
-    </p>
-    """, unsafe_allow_html=True)
 
 # ── Feedback ──────────────────────────────────────────────────────────────────
 colored_divider()
