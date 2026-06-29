@@ -1,7 +1,7 @@
-🗂️ data/ — Dataset & hasil preprocessing
+Folder data — Dataset & hasil preprocessing
 
-📓 notebooks/ — Jupyter notebooks
+Folder notebooks/ — Jupyter notebooks
 
-🤖 models/ — Model terlatih
+Folder models/ — Model terlatih
 
-🌐 Root — Aplikasi & konfigurasi
+Root — Aplikasi & konfigurasi
